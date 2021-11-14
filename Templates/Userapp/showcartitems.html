@@ -1,0 +1,28 @@
+{% extends "../master.html" %}
+{%block content%}
+<h1> Cart Details...</h1>
+    
+<table class="table">
+    <tr><th>Cake Id</th><th>Cake Name</th><th>Cake Price</th><th>Quantity</th></tr>
+    {%for item in cartitems%}
+    <form method = "POST" action= "removefromcart">
+        {%csrf_token%}
+    <tr>
+        <td>{{item.cake.id}}<input type="hidden" name="cakeid" value="{{item.cake.id}}"></td>
+        <td>{{item.cake.cakename}}</td>
+        <td>{{item.cake.price}}</td>
+        <td>{{item.qty}}</td>
+        <td><button class="button btn-success" type="submit">Remove from Cart</button></td>
+        
+    </tr>
+    </form>
+    {%endfor%}
+</table>
+<hr/>
+<p/>
+<h2>Total:{{request.session.total}}</h2>
+<hr/>
+<p/>
+<a href = "makepayment"><button type ="submit" class="button-btn-success">Proceed to Make Payment</button></a>
+
+{%endblock%}
